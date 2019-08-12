@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-right">
+            <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'add')); ?>" class="btn btn-sm btn-success">Dodaj notatkę</a>
+        </div>
+    </div>
+    &nbsp;
+    <div class="row">
+        <ul class="col-12 list-group">
+            <?php foreach($this->notes as $note): ?>
+                <li class="list-group-item"><?php echo $note->title ?>
+                    <p>
+                        <?php echo $note->content ?>
+                    </p>
+                    <a href="<?php echo $this->url(array('controller'=>'index', 'action'=> 'edit', 'id' => $note->id)); ?>" class="btn btn-sm btn-success">Edytuj</a>
+                    <a href="<?php echo $this->url(array('controller'=>'index', 'action'=> 'delete', 'id' => $note->id)); ?>" class="btn btn-sm btn-danger">Usuń</a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
