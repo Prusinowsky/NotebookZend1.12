@@ -21,7 +21,8 @@ class IndexController extends Zend_Controller_Action
 
     }
 
-    public function addAction(){
+    public function addAction()
+    {
         $form = new Application_Form_Note();
         $form->setAction(
             $this->view->url(
@@ -32,7 +33,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    public function createAction(){
+    public function createAction()
+    {
         $request = $this->getRequest();
         $form = new Application_Form_Note();
         if($form->isValid($request->getPost())) {
@@ -93,7 +95,29 @@ class IndexController extends Zend_Controller_Action
         $this->redirect('/index/show');
     }
 
+    public function googleCalendarAction()
+    {
+        $client = new Google_Client();
+        $client->setApplicationName("Google Calendar Test");
+        $client->setDeveloperKey("AIzaSyAQJu3aLJhQWXCP4hYenCtMEsF2wkPebTI");
+        $service = new Google_Service_Calendar($client);
+        $calendarId = 'nq5cct77rbgdnihmd5gfhrtbks@group.calendar.google.com';
+        $optParams = array(
+            'maxResults' => 10,
+            'orderBy' => 'startTime',
+            'singleEvents' => true,
+            'timeMin' => date('c'),
+        );
+        $results = $service->events->listEvents($calendarId, $optParams);
+        $events = $results->getItems();
+
+        $this->view->events = $events;
+    }
+
+
 }
+
+
 
 
 

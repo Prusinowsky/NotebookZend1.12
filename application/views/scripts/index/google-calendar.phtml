@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <?php foreach($this->events as $event) : ?>
+                <div>
+                    <div>Tytuł: <?php echo $event->getSummary(); ?></div>
+                    <div>Start: <?php echo $event->getStart()['dateTime']; ?></div>
+                        <div>End: <?php echo $event->getEnd()['dateTime']; ?></div>
+                    <hr>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
